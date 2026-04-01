@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vücut Yağ Oranı & Kalori Hesaplama</title>
+    <link rel="stylesheet" href="proje.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Vücut Analizi</h1>
+
+    <div id="main">
+        <div class="radio-group">
+            <div>
+                <input type="radio" id="erkek" name="cinsiyet" value="erkek" onclick="closeKalca()">
+                <label for="erkek">Erkek</label>
+            </div>
+            <div>
+                <input type="radio" id="kadin" name="cinsiyet" value="kadin" onclick="openKalca()">
+                <label for="kadin">Kadın</label>
+            </div>
+        </div>
+
+        <label for="boy">Boy (cm)</label>
+        <input id="boy" type="number" placeholder="Örn: 178">
+        <div id="cboy" class="error">Boy 0'dan küçük olamaz</div>
+
+        <label for="boyun">Boyun Çevresi (cm)</label>
+        <input id="boyun" type="number" placeholder="Örn: 38">
+        <div id="cboyun" class="error">Boyun 0'dan küçük olamaz</div>
+
+        <label for="bel">Bel Çevresi (cm)</label>
+        <input id="bel" type="number" placeholder="Örn: 85">
+        <div id="cbel" class="error">Bel 0'dan küçük olamaz</div>
+
+        <div id="okalca" style="display:none;">
+            <label for="kalca">Kalça Çevresi (cm)</label>
+            <input id="kalca" type="number" placeholder="Örn: 98 (sadece kadınlar için)">
+            <div id="ckalca" class="error">Kalça 0'dan küçük olamaz</div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="hesapla()">Hesapla</button>
+            <button class="secondary" onclick="reset()">Sıfırla</button>
+        </div>
+    </div>
+
+    <div id="bazal">
+        <p>Cinsiyet: <strong id="gcins"></strong></p>
+        <p>Boy: <strong id="gboy"></strong> cm</p>
+
+        <label for="kilo">Kilo (kg)</label>
+        <input id="kilo" type="number" placeholder="Örn: 78">
+        <div id="ekilo" class="error">Kilo 0'dan küçük olamaz</div>
+
+        <label for="yas">Yaş</label>
+        <input id="yas" type="number" placeholder="Örn: 28">
+        <div id="eyas" class="error">Yaş 0'dan küçük olamaz</div>
+
+        <label for="spor-gecmisi">Son 3 ayda düzenli spor yaptınız mı? (haftada 3+ gün)</label>
+        <select id="spor-gecmisi">
+            <option value="">Seçiniz</option>
+            <option value="evet">Evet</option>
+            <option value="hayir">Hayır</option>
+        </select>
+        <div id="e-spor-gecmisi" class="error">Lütfen spor geçmişini seçiniz</div>
+
+        <label for="spor-gun">Haftada kaç gün spora gidebilirsiniz?</label>
+        <select id="spor-gun">
+            <option value="">Seçiniz</option>
+            <option value="2">2 gün</option>
+            <option value="3">3 gün</option>
+            <option value="4">4 gün</option>
+            <option value="5">5 gün</option>
+            <option value="6">6 gün</option>
+        </select>
+        <div id="e-spor-gun" class="error">Lütfen gün sayısını seçiniz</div>
+
+        <div class="button-group">
+            <button onclick="hesapla2()">Devam Et</button>
+            <button class="secondary" onclick="back()">Geri Dön</button>
+        </div>
+    </div>
+
+    <!-- SONUÇ EKRANI -->
+    <div id="sonuc" style="display: none;">
+        <div class="result-layout">
+            <div class="left-column">
+                <div class="result-card">
+                    <h2>Vücut Analizi</h2>
+                    <p>Yağ Oranınız: <strong><span id="syag">?</span>%</strong></p>
+                    <p>Bazal Metabolizma Hızınız: <strong><span id="sbazal">?</span> kcal/gün</strong></p>
+                    <p id="kilolumu"></p>
+                    <p id="oneri" class="oneri-text"></p>
+                </div>
+
+                <div id="spor-programi">
+                    <h2>Size Özel Spor Programı Önerisi</h2>
+                    <div id="program-detay"></div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="anatomy-section">
+                    <h2>Vücut Bölgeleri (Tıklayın)</h2>
+                    <div class="anatomy-container" style="position: relative; max-width: 380px; margin: 0 auto;">
+                        <img src="human-muscle-front.jpg" alt="Kas Anatomisi" style="width: 100%; display: block; user-select: none;">
+
+                        <!-- Tıklanabilir kas bölgeleri -->
+                        <div class="muscle bas" onclick="showPart('bas')"></div>
+                        <div class="muscle gogus" onclick="showPart('gogus')"></div>
+                        <div class="muscle karin" onclick="showPart('karin')"></div>
+                        <div class="muscle kalca" onclick="showPart('kalca')"></div>
+                        <div class="muscle bacak" onclick="showPart('bacak')"></div>
+                        <div class="muscle kol-sol" onclick="showPart('kol')"></div>
+                        <div class="muscle kol-sag" onclick="showPart('kol')"></div>
+
+                        <!-- Tek part info yazısı -->
+                        <div id="part-info" style="position:absolute; bottom:-30px; width:100%; text-align:center; font-weight:500; color:#333;">
+                            Bir bölgeye tıklayın...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="bigeri()">Önceki Sayfaya Dön</button>
+            <button class="secondary" onclick="reset()">En Başa Dön</button>
+        </div>
+    </div>
+</div>
+
+<script src="proje.js"></script>
+</body>
+</html>

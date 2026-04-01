@@ -1,0 +1,331 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.container {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    max-width: 1100px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1a2a44;
+    margin-bottom: 1.2em;
+    font-weight: 600;
+}
+
+
+.radio-group {
+    display: flex;
+    gap: 2.5rem;
+    margin: 1.8rem 0;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    margin: 14px 0 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 6px;
+    display: none;
+}
+
+
+.button-group {
+    margin-top: 28px;
+    text-align: center;
+}
+
+button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 8px 6px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button.secondary {
+    background: #6b7280;
+}
+
+button.secondary:hover {
+    background: #4b5563;
+}
+
+
+.result-layout {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 32px;
+    margin: 32px 0;
+    align-items: flex-start;
+}
+
+.left-column {
+    flex: 1 1 50%;          
+    min-width: 380px;
+}
+
+.right-column {
+    flex: 1 1 50%;
+    min-width: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.result-card {
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    border: 1px solid #e5e7eb;
+}
+
+.result-card p {
+    margin: 14px 0;
+    font-size: 1.1rem;
+}
+
+#syag,
+#sbazal,
+#kilolumu {
+    font-weight: 700;
+    color: #111827;
+}
+
+#oneri {
+    color: #059669;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 16px !important;
+}
+
+#spor-programi {
+    background: #f9fafb;
+    padding: 24px;
+    border-radius: 12px;
+    border-left: 5px solid #3b82f6;
+    border: 1px solid #e5e7eb;
+}
+
+#program-detay {
+    line-height: 1.7;
+    color: #374151;
+}
+
+#program-detay strong {
+    color: #111827;
+}
+
+.anatomy-section {
+    width: 100%;
+}
+
+.anatomy-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 380px;
+}
+
+.anatomy-container svg {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+}
+
+.body-part {
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.body-part:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+#part-info {
+    margin-top: 24px;
+    padding: 16px;
+    background: #ecfeff;
+    border-radius: 10px;
+    min-height: 90px;
+    border: 1px solid #a5f3fc;
+    color: #0f766e;
+    font-size: 0.975rem;
+}
+
+
+@media (max-width: 1024px) {
+    .result-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .left-column, .right-column {
+        min-width: 100%;
+    }
+    
+    .anatomy-container {
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 16px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    
+    button {
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+    }
+}
+
+
+.muscle-mode {
+    position: relative;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.muscle-mode img {
+    width: 100%;
+    display: block;
+}
+
+.muscle {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(180, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease;
+}
+
+.muscle:hover,
+.muscle.active-part {
+    opacity: 1;
+    box-shadow: 0 0 18px rgba(180, 0, 0, 0.6);
+}
+
+/* 📍 KONUM VE BOYUTLAR (GÜNCELLENDİ) */
+.bas {
+    top: 2%;
+    left: 40%;
+    width: 20%;
+    height: 10%;
+}
+
+.gogus {
+    top: 16%;
+    left: 26%;
+    width: 48%;
+    height: 18%;
+}
+
+/* Karın yukarı alındı */
+.karin {
+    top: 32%;
+    left: 32%;
+    width: 36%;
+    height: 20%;
+}
+
+.kol-sol {
+    top: 18%;
+    left: 6%;
+    width: 18%;
+    height: 36%;
+}
+
+.kol-sag {
+    top: 18%;
+    left: 76%;
+    width: 18%;
+    height: 36%;
+}
+
+/* Kalça yukarı alındı */
+.kalca {
+    top: 46%;
+    left: 28%;
+    width: 44%;
+    height: 14%;
+}
+
+/* Bacak yukarı alındı */
+.bacak {
+    top: 60%;
+    left: 34%;
+    width: 32%;
+    height: 26%;
+}
